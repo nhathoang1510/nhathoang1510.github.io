@@ -15,14 +15,13 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js">
 		</script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+        
 
         <title>AGV ROBOT</title>
         <link rel="icon" href="asset/img/icon.ico" type="icon/image type">
-        <style type="text/css">
-            body{
-            background-image: url(./asset/img/bg6.jpg);
-        }
-        </style>
     </head>
     <body>
         <!--==================== HEADER ====================-->
@@ -30,7 +29,7 @@
             <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
                 <div class="container-fluid">
                     <a class="navbar-branch" href="./index.html">
-                        <img src="asset/img/icon.ico" height="50">
+                        <img src="asset/img/icon.ico"class="header-icon" >
                         AGV ROBOT
                     </a>
                     <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -51,96 +50,58 @@
             <!--==================== HOME ====================-->
             <section class="home section" id="home">
                 <div class="container__home">
-                    <div class="main__home">
-                        <div class="left">
-                            <p>ITEMS POSITON</p>
-                            <div class="redItem"></div>
-                        </div>
-                        <div class="right">
-                            <div class="right_header">
-                                <!--                  <label for="find">Merchandise Name</label>
-                                <input type="text">
-                                <label for="x">Tọa độ x</label>
-                                <input type="text" name="x" class="input_x">
-                                <label for="y">Tọa dộ y</label>
-                                <input type="text" name="y" class="input_y">
-                                <button class="start">Find</button> -->
-                                <!-- <form action="dashboard.php" method="POST">
-                                    <label for="find">MERCHANDISE NAME</label>
-                                    <input type="text">
-                                    <input type="submit" value="Find">
-                                </form> -->
-                            </div>
-                            <p>VEHICLE POSITION</p>
-                            <div class="right_content">
-                            </div>
-                        </div>
+                    
+                    <div class="search">
+                        <label class="label" for="find">ITEMS: </label>
+                        <!-- <input type="text"> -->
+                        <label class="label"for="x">Tọa độ x</label>
+                        <input type="text" name="x" class="input_x"id="input_x">
+                        <label class="label"for="y">Tọa độ y</label>
+                        <input type="text" name="y" class="input_y"id="input_y">
+                        <button class="button button--flex"id ="button">Start</button>
                     </div>
-                </div>
-            </section>
-            <!--==================== CONTACT ME ====================-->
-            <section class="contact section" id="contact">
-                <h2 class="section__title">Contact Me</h2>
-                <span class="section__subtitle">Get in touch</span>
-                <div class="contact__container container grid">
-                    <div>
-                        <div class="contact__information">
-                            <i class="uil uil-phone contact__icon"></i>
-                            <div>
-                                <h3 class="contact__title">Call Me</h3>
-                                <span class="contact__subtitle">+84797818548</span>
+                    <hr class="light-100">
+                    <div class="main__home">
+                        <div class="pos-container">
+                            <p>VEHICLE POSITION</p>
+                            <div class="grid-pos">
+                                <div id='container1'></div>
+                                <div id='container2'></div>    
                             </div>
                         </div>
-
-                        <div class="contact__information">
-                            <i class="uil uil-envelope contact__icon"></i>
-                            <div>
-                                <h3 class="contact__title">Email</h3>
-                                <span class="contact__subtitle">nhathoangbui123@gmail.com</span>
-                            </div>
-                        </div>
-
-                        <div class="contact__information">
-                            <i class="uil uil-map-marker contact__icon"></i>
-                            <div>
-                                <h3 class="contact__title">Location</h3>
-                                <span class="contact__subtitle">District 12 - Ho Chi Minh City -  Viet Nam</span>
-                            </div>
-                        </div>
+                        <hr class="light-100">
                     </div>
                 </div>
             </section>
         </main>
+        
         <!--==================== FOOTER ====================-->
-        <footer class="footer">
-            <div class="footer__bg">
-                <div class="footer__container container grid">
-                    <div>
-                        <h1 class="footer__title">Nhat Hoang</h1>
-                        <span class="footer__subtitle">Embedded System</span>
+        <footer>
+            <div class="container-fluid padding">	
+                <div class="row text-center padding">
+                    <div class="col-12">
+                        <h2>Contact</h2>
                     </div>
-
-                    <ul class="footer__links">
-                        <li>
-                            <a href="#home" class="footer__link">Home</a>
-                        </li>
-                        <li>
-                            <a href="#contact" class="footer__link">Contact Me</a>
-                        </li>
-                    </ul>
-                    <div class="foot__social">
-                        <a href="https://www.facebook.com/profile.php?id=100006989110404" class="footer__social">
-                            <i class="uil uil-facebook"></i>
-                        </a>
-                        <a href="https://www.instagram.com/nhathoangbui123/" class="footer__social">
-                            <i class="uil uil-instagram-alt"></i>
-                        </a>
-                        <a href="https://github.com/nhathoangbui123" class="footer__social">
-                            <i class="uil uil-github"></i>
-                        </a>
+                    <div class="col-12 social padding">
+                        <a href="https://www.facebook.com/profile.php?id=100006989110404"><i class="fab fa-facebook" ></i></a>
+                        <a href="https://www.instagram.com/nhathoangbui123/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/channel/UCSM_hC2jWx32yta7BZ7BGKw"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-                <p class="footer__copy">&#169;NhatHoang. All right reserved</p>
+            </div>
+            <div class="container-fluid padding">	
+                <div class="row text-center">
+                    <div class="col">
+                        <hr class="light-100">
+                        <p>+84797818548</p>
+                        <p>nhathoangbui123@gmail.com</p>
+                        <p>HCMUTE</p>
+                    </div>
+                    <div class="col-12">
+                        <hr class="light-100">
+                        <h5>&copy; AGV ROBOT</h5>
+                    </div>
+                </div>
             </div>
         </footer>
         <!--==================== MAIN JS ====================-->
