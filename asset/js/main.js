@@ -1,7 +1,5 @@
-
 window.onload = function onLoad() {
-  createGrid(2, 4,'#container1');
-  createGrid(2, 4,'#container2');
+  gen(6,7);
   var firebaseConfig = {
     apiKey: "AIzaSyAULD_5XOVsrub8anXNRIQkPdOEX8Z1Qjw",
     authDomain: "project2-b7d1e.firebaseapp.com",
@@ -23,46 +21,22 @@ window.onload = function onLoad() {
     console.log(pos);
     console.log(x);
     console.log(y);
-    var cc= "#sq-"+x+y;
+    var cc= x+y;
     console.log(cc);
-    changeSquareColor(cc, 3);
+    // changeSquareColor(cc, 3);
+    // var $row = $('#row-'+x);
+    // var robot = "<li id='sq-"+cc+"' class='robot'></li>";
+    // $('#sq-'+cc).remove();
+    // yy=(cc-1).toString();
+    // console.log(yy);
+    
+    // $('#sq-'+yy).after(robot);
+
   });
   const button = document.getElementById('button')
     button.addEventListener('click', () => {
     start();
   })
-// $(document).ready(function() {
-
-// });
-//   $('.square').on('mouseenter', function(event) {
-//     var square = event.target;
-//     var colorId = $(square).data('color');
-
-//     if (colorId || colorId === 0) {
-//       var color = colors[colorId];
-    
-//       $(square).html('<span>'+color+'</span>');
-//     }
-//   });
-
-//   $('.square').on('mouseleave', function(event) {
-//     var square = event.target;
-  
-//     $(square).html('');
-//   });
-
-//   $('.square').on('click', function(event) {
-//     var square = event.currentTarget;
-//     var colorId = $(square).data('color');
-
-//     if (colorId === numColors) {
-//       changeSquareColor(square, 0);
-//     } else {
-//       var newColorId = colorId+1;
-    
-//       changeSquareColor(square, newColorId);
-//     }
-//   });
 };
 const colors = [
   'black', 
@@ -72,79 +46,30 @@ const colors = [
   'magenta', 
   'red', 
   'yellow',
-  'orange'
+  'orange',
+  'white',
+  'gray'
 ];
 const numColors = colors.length-1;
-function createGrid(numRows, numSquares,id) {
-  for (var i=0; i<numRows; i++) {
-    if(id=='#container1'){
-        $(id).append("<ul id='row-"+i+1+"' class='row'>");
+function gen(numrow, numcol){
+  for(let i = 1; i <= numrow; i++ ){
+    $('#container1').append("<ul id='row-"+i+"' class='row'>");
+    var $row = $('#row-'+i);
+      for(let j = 1; j <= numcol; j++){
+        count = i.toString() + j
+        var square = "<li id='sq-"+count+"' class='square'> </li>";
+        $row.append(square);
+        var cc = '#sq-'+count;
+        colorId=9;
+        changeSquareColor(cc, colorId);
     }
-    else{
-        $(id).append("<ul id='row-"+i+2+"' class='row'>");
-    }
-
-    if (i===(numRows-1)) {
-      createSquares(numRows, numSquares,id);
-    };
-  }
-}
-function createSquares(numRows, numSquares,id2) {
-  var count = 0;
-  for (var i=0; i<numRows; i++) {
-    if(id2=='#container1'){
-        var $row = $('#row-'+i+1);
-    }
-    else{
-        var $row = $('#row-'+i+2);
-    }
-    for (var j=0; j<numSquares; j++) {
-        if(id2=='#container1'){
-            var square = "<li id='sq-"+count+1+"' class='square'></li>";
-            $row.append(square);
-        }
-        else{
-            var square = "<li id='sq-"+count+2+"' class='square'></li>";
-            $row.append(square);
-        }
-        // var square = "<li id='sq-"+count+"' class='square'></li>";
-        // $row.append(square);
-        count++;
-        if (j===(numSquares-1)) {
-            colorSquares(count,id2);
-        }
-    }
-  }
-}
-function colorSquares(numSquares,id2) {
-  var colorId = 0;
-  
-  for (var i=0; i<numSquares; i++) {
-    //var square = '#sq-'+i;
-    if(id2=='#container1'){
-        var square = '#sq-'+i+1;
-    }
-    else{
-        var square = '#sq-'+i+2;
-    }
-    colorId=5;
-    changeSquareColor(square, colorId);
-    
-    
-    // if (colorId < numColors) {
-    //   changeSquareColor(square, colorId);
-    //   colorId++;
-    // } else {
-    //   changeSquareColor(square, colorId);
-    //   colorId = 0;
-    // }
   }
 }
 function changeSquareColor(square, newColorId) {
   var newColor = colors[newColorId];
   
   $(square).data('color', newColorId);
-  $(square).html('<span>'+newColor+'</span>');
+  //$(square).html('<span>'+newColor+'</span>');
   $(square).css('background-color', newColor);
 };
 function start()  {
