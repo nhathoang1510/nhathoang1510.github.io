@@ -215,7 +215,10 @@ li{
     /* margin-top: 1rem; */
     margin-right: 0.5rem;
 }
+
 .robot{
+    border: 1em solid gray;
+    margin: 0;
     -webkit-text-stroke-width: 0.03em;
     -webkit-text-stroke-color: black;
     align-content: center;

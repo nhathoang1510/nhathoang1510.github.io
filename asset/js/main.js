@@ -23,14 +23,7 @@ window.onload = function onLoad() {
     console.log(y);
     var cc= x+y;
     console.log(cc);
-    // changeSquareColor(cc, 3);
-    // var $row = $('#row-'+x);
-    // var robot = "<li id='sq-"+cc+"' class='robot'></li>";
-    // $('#sq-'+cc).remove();
-    // yy=(cc-1).toString();
-    // console.log(yy);
-    
-    // $('#sq-'+yy).after(robot);
+    setColor(cc,x,y);
 
   });
   const button = document.getElementById('button')
@@ -38,19 +31,6 @@ window.onload = function onLoad() {
     start();
   })
 };
-const colors = [
-  'black', 
-  'blue',
-  'cyan', 
-  'green', 
-  'magenta', 
-  'red', 
-  'yellow',
-  'orange',
-  'white',
-  'gray'
-];
-const numColors = colors.length-1;
 function gen(numrow, numcol){
   for(let i = 1; i <= numrow; i++ ){
     $('#container1').append("<ul id='row-"+i+"' class='row'>");
@@ -59,19 +39,38 @@ function gen(numrow, numcol){
         count = i.toString() + j
         var square = "<li id='sq-"+count+"' class='square'> </li>";
         $row.append(square);
-        var cc = '#sq-'+count;
-        colorId=9;
-        changeSquareColor(cc, colorId);
+        document.querySelector('#sq-'+count).style.backgroundColor = "gray"
     }
   }
 }
-function changeSquareColor(square, newColorId) {
-  var newColor = colors[newColorId];
-  
-  $(square).data('color', newColorId);
-  //$(square).html('<span>'+newColor+'</span>');
-  $(square).css('background-color', newColor);
-};
+function setColor(position,x,y){
+    var database = firebase.database();
+    var old = database.ref('Position/olddata');
+    old.on('value', function(snapshot) {
+      var childData = snapshot.val();
+      old=childData;
+      x_old= old.slice(0,1);
+      y_old= old.slice(2,3);
+    });
+    if(x>x_old){
+      var j =(parseInt(position)-1).toString();
+      console.log(j);
+      document.querySelector('#sq-'+j).style.backgroundColor = "gray"
+      document.querySelector('#sq-'+position).style.backgroundColor = "green"
+      old =data;
+      var database = firebase.database();
+      database.ref('Position/olddata').set(old);
+    }
+    if(data<old){
+      var k =(parseInt(position)+1).toString();
+      console.log(k);
+      document.querySelector('#sq-'+k).style.backgroundColor = "gray"
+      document.querySelector('#sq-'+position).style.backgroundColor = "green"
+      old =data;
+      var database = firebase.database();
+      database.ref('Position/olddata').set(old);
+    }
+}
 function start()  {
   var x = document.getElementById("input_x").value; // A String value
   var y = document.getElementById("input_y").value; // A String value
