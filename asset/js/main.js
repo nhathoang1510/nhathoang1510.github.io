@@ -1,3 +1,5 @@
+var x_old=0;
+var y_old=0;
 window.onload = function onLoad() {
   gen(6,7);
   var firebaseConfig = {
@@ -12,19 +14,13 @@ window.onload = function onLoad() {
     };
   firebase.initializeApp(firebaseConfig);
   var database = firebase.database();
-  var position = database.ref('Position/robot');
+  var position = database.ref('Robot/robot');
   position.on('value', function(snapshot) {
     var childData = snapshot.val();
     pos=childData;
     var x= pos.slice(0,1);
     var y= pos.slice(2,3);
-    console.log(pos);
-    console.log(x);
-    console.log(y);
-    var cc= x+y;
-    console.log(cc);
-    setColor(cc,x,y);
-
+    setColor(x,y);
   });
   const button = document.getElementById('button')
     button.addEventListener('click', () => {
@@ -43,32 +39,53 @@ function gen(numrow, numcol){
     }
   }
 }
-function setColor(position,x,y){
+function setColor(x,y){
     var database = firebase.database();
-    var old = database.ref('Position/olddata');
+    var old = database.ref('Robot/old');
     old.on('value', function(snapshot) {
-      var childData = snapshot.val();
-      old=childData;
-      x_old= old.slice(0,1);
-      y_old= old.slice(2,3);
+      var childData = snapshot.val();   
+      xy_old=childData;
+      x_old= xy_old.slice(0,1);
+      y_old= xy_old.slice(2,3);
     });
-    if(x>x_old){
-      var j =(parseInt(position)-1).toString();
-      console.log(j);
-      document.querySelector('#sq-'+j).style.backgroundColor = "gray"
-      document.querySelector('#sq-'+position).style.backgroundColor = "green"
-      old =data;
+    if(x==x_old&&y>y_old){
+      var j =(parseInt(y)-1).toString();
+      document.querySelector('#sq-'+x+j).style.backgroundColor = "gray"
+      document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
+      document.querySelector('#sq-'+x+y).style.border="0.5em solid gray";
+      xy_old=(x+0+y).toString();
       var database = firebase.database();
-      database.ref('Position/olddata').set(old);
+      database.ref('Robot/old').set(xy_old);
     }
-    if(data<old){
-      var k =(parseInt(position)+1).toString();
-      console.log(k);
-      document.querySelector('#sq-'+k).style.backgroundColor = "gray"
-      document.querySelector('#sq-'+position).style.backgroundColor = "green"
-      old =data;
+    if(x==x_old&&y<y_old){
+      var j =(parseInt(y)+1).toString();
+      document.querySelector('#sq-'+x+j).style.backgroundColor = "gray"
+      document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
+      document.querySelector('#sq-'+x+y).style.border="0.5em solid gray";
+      xy_old=(x+0+y).toString();
       var database = firebase.database();
-      database.ref('Position/olddata').set(old);
+      database.ref('Robot/old').set(xy_old);
+    }
+    if(y==y_old&&x>x_old){
+      var j =(parseInt(x)-1).toString();
+      document.querySelector('#sq-'+j+y).style.backgroundColor = "gray"
+      document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
+      document.querySelector('#sq-'+x+y).style.border="0.5em solid gray";
+      xy_old=(x+0+y).toString();
+      var database = firebase.database();
+      database.ref('Robot/old').set(xy_old);
+    }
+    if(y==y_old&&x<x_old){
+      var j =(parseInt(x)+1).toString();
+      document.querySelector('#sq-'+j+y).style.backgroundColor = "gray"
+      document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
+      document.querySelector('#sq-'+x+y).style.border="0.5em solid gray";
+      xy_old=(x+0+y).toString();
+      var database = firebase.database();
+      database.ref('Robot/old').set(xy_old);
+    }
+    if(y==y_old&&x==x_old){
+      document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
     }
 }
 function start()  {
@@ -79,5 +96,5 @@ function start()  {
   console.log(y);
   console.log(c);
   var database = firebase.database();
-  database.ref('Position/user').set(c);
+  database.ref('User/user').set(c);
 };
