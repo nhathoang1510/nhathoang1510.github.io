@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--==================== UNICONS ====================-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <!--==================== CSS ====================-->
+    <link rel="stylesheet" href="asset/css/style.css">
+    <!--==================== Boostrap ====================-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+
+    <title>AGV ROBOT</title>
+    <link rel="icon" href="asset/img/icon.ico" type="icon/image type">
+</head>
+<body>
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+        <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+            <div class="container-fluid">
+                <a class="navbar-branch" href="index.html">
+                    <img src="asset/img/icon.ico" class="header-icon">
+                    AGV ROBOT
+                </a>
+                <div style="margin-left: 30px;margin-bottom: 5px;">
+                    <span id="user" class="message">Hello, < email-id ></Email-id></span>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                        <div class="success">
+                            <button class="btn btn-danger" onclick="logout()">Logout</button>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!--==================== MAIN ====================-->
+    <main class="main">
+        <!--==================== HOME ====================-->
+        <section class="home section" id="home">
+            <div class="container__home">
+
+                <div class="search">
+                    <label class="label" for="find">ITEMS: </label>
+                    <!-- <input type="text"> -->
+                    <label class="label" for="x">Tọa độ x</label>
+                    <input type="text" name="x" class="input_x" id="input_x">
+                    <label class="label" for="y">Tọa độ y</label>
+                    <input type="text" name="y" class="input_y" id="input_y">
+                    <button class="button button--flex" id="button">Start</button>
+                </div>
+                <hr class="light-100">
+                <div class="main__home">
+                    <div class="pos-container">
+                        <p>VEHICLE POSITION</p>
+                        <div class="grid-pos">
+                            <div id='container1'></div>
+                        </div>
+                    </div>
+                    <hr class="light-100">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--==================== FOOTER ====================-->
+    <footer>
+        <div class="container-fluid padding">
+            <div class="row text-center padding">
+                <div class="col-12">
+                    <h2>Contact</h2>
+                </div>
+                <div class="col-12 social padding">
+                    <a href="https://www.facebook.com/profile.php?id=100006989110404"><i
+                            class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/nhathoangbui123/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/channel/UCSM_hC2jWx32yta7BZ7BGKw"><i
+                            class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid padding">
+            <div class="row text-center">
+                <div class="col">
+                    <hr class="light-100">
+                    <p>+84797818548</p>
+                    <p>nhathoangbui123@gmail.com</p>
+                    <p>dokun1812@gmail.com</p>
+                    <p>HCMUTE</p>
+                </div>
+                <div class="col-12">
+                    <hr class="light-100">
+                    <h5>&copy; AGV ROBOT</h5>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--==================== MAIN JS ====================-->
+    <script src="asset/js/main.js"></script>
+    <script src="asset/js/firebase.js"></script>
+</body>
+
+</html>

@@ -271,4 +271,11 @@ footer {
 	background-color: var(--first-color);
 	color: #fafafa;
 	opacity: 0.9;
+}   
+.success{
+    font-size: 18px;
+    margin-top: 5px;
+    margin-left: 10px;
+    color: seagreen;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
