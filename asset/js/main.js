@@ -1,5 +1,8 @@
 var x_old=0;
 var y_old=0;
+var user_x_old=0;
+var user_y_old=0;
+var cc=0;
 window.onload = function onLoad() {
   //tao grid
   gen(6,7);
@@ -11,14 +14,25 @@ window.onload = function onLoad() {
     var x = pos.slice(0, 1); 
     var y = pos.slice(2, 3);
     setColor(x,y);
+    console.log("pos+"+pos);
   });
+
+  var usr = database.ref('User/user');
+  usr.on('value', function(snapshot) {
+    var childData = snapshot.val();   
+    user=childData;
+    var xx = user.slice(0, 1); 
+    var yy = user.slice(2, 3);
+    userdata(xx,yy,user);
+  });
+
   //nut nhan start
   const button = document.getElementById('button')
   button.addEventListener('click', () => {
     start();
   });
   //
-  userdata();
+  
   // Kiem tra nguoi dung hien tai
   firebase.auth().onAuthStateChanged((user)=>{
     if(!user){
@@ -37,7 +51,6 @@ function gen(numrow, numcol){
         count = i.toString() + j
         var square = "<li id='sq-"+count+"' class='square'> </li>";
         $row.append(square);
-        //document.querySelector('#sq-'+count).style.backgroundColor = "gray"
         // dieu khien gen ra cac o ke hang
         if (i >= 2 && i <= 5 && j >= 2 && j <= 3 || i >= 2 && i <= 5 && j >= 5 && j <= 6) { 
           document.querySelector('#sq-'+count).style.backgroundColor = "red"
@@ -138,22 +151,34 @@ function setColor(x,y){
       var database = firebase.database();
       database.ref('Robot/old').set(xy_old);
     }
-    if(y==y_old&&x==x_old){
-      document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
-    }
 }
-//ham lay user dataa
-function userdata(){
+//lay user data
+function userdata(x,y,ccc){
   var database = firebase.database();
-  var usr = database.ref('User/user');
-  usr.on('value', function(snapshot) {
+  var user_old = database.ref('User/old');
+  user_old.on('value', function(snapshot) {
     var childData = snapshot.val();   
-    user=childData;
-    x_user= user.slice(0,1);
-    y_user= user.slice(2,3);
-    document.querySelector('#sq-'+x_user+y_user).style.backgroundColor = "yellow"
-    database.ref('User/old').set(user);
+    xxy_old=childData;
+    cc=xxy_old.toString();
+    user_x_old= xxy_old.slice(0,1);
+    user_y_old= xxy_old.slice(2,3);
+    console.log(user_x_old);
+    console.log(user_y_old);
   });
+  if(ccc!=cc){
+    if (user_x_old >= 2 && user_x_old <= 5 && user_y_old >= 2 && user_y_old <= 3 || user_x_old >= 2 && user_x_old <= 5 && user_y_old >= 5 && user_y_old<= 6) { 
+      document.querySelector('#sq-'+x+y).style.border="0.5em solid yellow";
+      document.querySelector('#sq-'+user_x_old+user_y_old).style.border="0.5em";
+    }else{
+      console.log('#sq-'+user_x_old+user_y_old);
+      document.querySelector('#sq-'+x+y).style.border="0.5em solid yellow";
+      document.querySelector('#sq-'+user_x_old+user_y_old).style.border="0.5em";
+      
+    }
+    xxy_old=(x+0+y).toString();
+    var database = firebase.database();
+    database.ref('User/old').set(xxy_old);
+  }
 }
 //ham gui data user len firebase
 function start()  {

@@ -28,17 +28,21 @@
             </div>
             <form onsubmit="login()" id="loginForm" class="card-body px-5 py-4">
                 <center><small><span id="error" style="color: red"></span></small></center>
-                <center><label class="custom-field">
-                    <input id="email" type="text" class="input" required />
-                    <span class="placeholder">Email</span>
-                </label><br />
-                <label class="custom-field">
-                    <input id="password" type="password" class="input" required />
-                    <span class="placeholder">Password</span>
-                </label></center><br /><br/>
+
+                <center>
+                    <label class="custom-field">
+                        <input id="email" type="text" class="input" required />
+                        <span class="placeholder">Email</span>
+                    </label><br />
+                    <label class="custom-field">
+                        <input id="password" type="password" class="input" required />
+                        <span class="placeholder">Password</span>
+                    </label>
+                </center><br /><br/>
                 <a href="#" onclick="forgotPass()"s>Forgot Password</a>
-                <center><button type="submit" class="btn btn-primary">Login</button>
-                <button onclick="signUp()" class="btn btn-secondary">Sign Up</button>
+                <center>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button onclick="signUp()" class="btn btn-secondary">Sign Up</button>
                 </center>
             </form>
         </div>
