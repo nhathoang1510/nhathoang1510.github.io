@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
 body{
-    background: #F8F8F8;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(120deg,#037ADE,#03E5B7);
+    height: 100vh;
+    overflow: hidden;
 }
 
 *, *::before, *::after{
@@ -52,4 +56,24 @@ body{
     margin-top: 15px;
     color: seagreen;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    background: white;
+    border-radius: 50px 5px;
+}
+
+.forgot_pass a{
+    float: right;
+    text-decoration: none;
+    color: #666666;
+}
+
+.forgot_pass :hover{
+    text-decoration: underline;
 }

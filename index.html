@@ -21,7 +21,7 @@
         <link rel="icon" href="asset/img/icon.ico" type="icon/image type">
     </head>
     <body class="d-flex justify-content-center p-5">
-        <div class="card">
+        <div class="login">
             <div class="card-header">
                 <center><h3>AGV ROBOT WELCOME</h3></center>
                 <center><h3>LOGIN</h3></center>
@@ -35,10 +35,17 @@
                 <label class="custom-field">
                     <input id="password" type="password" class="input" required />
                     <span class="placeholder">Password</span>
-                </label></center><br /><br/>
-                <a href="#" onclick="forgotPass()"s>Forgot Password</a>
-                <center><button type="submit" class="btn btn-primary">Login</button>
-                <button onclick="signUp()" class="btn btn-secondary">Sign Up</button>
+                </label></center>
+                <br>
+                <div class="forgot_pass">
+                    <a href="#" onclick="forgotPass()">Forgot Password</a>
+                </div>
+                <br> <br>
+                <div>
+                    <center><button type="submit" class="btn btn-primary">Login</button>
+                    <button onclick="signUp()" class="btn btn-secondary">Sign Up</button>
+                </div>
+                
                 </center>
             </form>
         </div>
