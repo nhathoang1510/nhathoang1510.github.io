@@ -17,6 +17,8 @@ window.onload = function onLoad() {
   button.addEventListener('click', () => {
     start();
   });
+  //
+  userdata();
   // Kiem tra nguoi dung hien tai
   firebase.auth().onAuthStateChanged((user)=>{
     if(!user){
@@ -35,12 +37,19 @@ function gen(numrow, numcol){
         count = i.toString() + j
         var square = "<li id='sq-"+count+"' class='square'> </li>";
         $row.append(square);
-        document.querySelector('#sq-'+count).style.backgroundColor = "gray"
+        //document.querySelector('#sq-'+count).style.backgroundColor = "gray"
+        // dieu khien gen ra cac o ke hang
+        if (i >= 2 && i <= 5 && j >= 2 && j <= 3 || i >= 2 && i <= 5 && j >= 5 && j <= 6) { 
+          document.querySelector('#sq-'+count).style.backgroundColor = "red"
+        } else {
+          document.querySelector('#sq-'+count).style.backgroundColor = "gray"
+        }
     }
   }
 }
 //ham setcolor tai vi tri x y
 function setColor(x,y){
+
     var database = firebase.database();
     var old = database.ref('Robot/old');
     old.on('value', function(snapshot) {
@@ -49,38 +58,82 @@ function setColor(x,y){
       x_old= xy_old.slice(0,1);
       y_old= xy_old.slice(2,3);
     });
+
     if(x==x_old&&y>y_old){
       var j =(parseInt(y)-1).toString();
-      document.querySelector('#sq-'+x+j).style.backgroundColor = "gray"
-      document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
-      document.querySelector('#sq-'+x+y).style.border="0.5em solid gray";
+      if (x >= 2 && x <= 5 && j >= 2 && j <= 3 || x >= 2 && x <= 5 && j >= 5 && j <= 6) { 
+        document.querySelector('#sq-'+x+j).style.backgroundColor = "red"
+        document.querySelector('#sq-'+x+j).style.border="0em solid red";
+      } else {
+        document.querySelector('#sq-'+x+j).style.backgroundColor = "gray"
+      }
+
+      if (x >= 2 && x <= 5 && y >= 2 && y <= 3 || x >= 2 && x <= 5 && y >= 5 && y <= 6) { 
+        document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
+        document.querySelector('#sq-'+x+y).style.border="0.5em solid red";
+      } else {
+        document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
+        document.querySelector('#sq-'+x+y).style.border="0.5em solid gray";
+      }
       xy_old=(x+0+y).toString();
       var database = firebase.database();
       database.ref('Robot/old').set(xy_old);
     }
     if(x==x_old&&y<y_old){
       var j =(parseInt(y)+1).toString();
-      document.querySelector('#sq-'+x+j).style.backgroundColor = "gray"
-      document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
-      document.querySelector('#sq-'+x+y).style.border="0.5em solid gray";
+      if (x >= 2 && x <= 5 && j >= 2 && j <= 3 || x >= 2 && x <= 5 && j >= 5 && j <= 6) { 
+        document.querySelector('#sq-'+x+j).style.backgroundColor = "red"
+        document.querySelector('#sq-'+x+j).style.border="0em solid red";
+      } else {
+        document.querySelector('#sq-'+x+j).style.backgroundColor = "gray"
+      }
+      if (x >= 2 && x <= 5 && y >= 2 && y <= 3 || x >= 2 && x <= 5 && y >= 5 && y <= 6) { 
+        document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
+        document.querySelector('#sq-'+x+y).style.border="0.5em solid red";
+      } else {
+        document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
+        document.querySelector('#sq-'+x+y).style.border="0.5em solid gray";
+      }
       xy_old=(x+0+y).toString();
       var database = firebase.database();
       database.ref('Robot/old').set(xy_old);
     }
     if(y==y_old&&x>x_old){
       var j =(parseInt(x)-1).toString();
-      document.querySelector('#sq-'+j+y).style.backgroundColor = "gray"
-      document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
-      document.querySelector('#sq-'+x+y).style.border="0.5em solid gray";
+      if (j >= 2 && j <= 5 && y >= 2 && y <= 3 || j >= 2 && j <= 5 && y >= 5 && y <= 6) { 
+        document.querySelector('#sq-'+j+y).style.backgroundColor = "red"
+        document.querySelector('#sq-'+j+y).style.border="0em solid red";
+      } else {
+        document.querySelector('#sq-'+j+y).style.backgroundColor = "gray"
+      }
+
+      if (x >= 2 && x <= 5 && y >= 2 && y <= 3 || x >= 2 && x <= 5 && y >= 5 && y <= 6) { 
+        document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
+        document.querySelector('#sq-'+x+y).style.border="0.5em solid red";
+      } else {
+        document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
+        document.querySelector('#sq-'+x+y).style.border="0.5em solid gray";
+      }
       xy_old=(x+0+y).toString();
       var database = firebase.database();
       database.ref('Robot/old').set(xy_old);
     }
     if(y==y_old&&x<x_old){
       var j =(parseInt(x)+1).toString();
-      document.querySelector('#sq-'+j+y).style.backgroundColor = "gray"
-      document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
-      document.querySelector('#sq-'+x+y).style.border="0.5em solid gray";
+      if (j >= 2 && j <= 5 && y >= 2 && y <= 3 || j >= 2 && j <= 5 && y >= 5 && y <= 6) { 
+        document.querySelector('#sq-'+j+y).style.backgroundColor = "red"
+        document.querySelector('#sq-'+j+y).style.border="0em solid red";
+      } else {
+        document.querySelector('#sq-'+j+y).style.backgroundColor = "gray"
+      }
+
+      if (x >= 2 && x <= 5 && y >= 2 && y <= 3 || x >= 2 && x <= 5 && y >= 5 && y <= 6) { 
+        document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
+        document.querySelector('#sq-'+x+y).style.border="0.5em solid red";
+      } else {
+        document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
+        document.querySelector('#sq-'+x+y).style.border="0.5em solid gray";
+      }
       xy_old=(x+0+y).toString();
       var database = firebase.database();
       database.ref('Robot/old').set(xy_old);
@@ -88,6 +141,19 @@ function setColor(x,y){
     if(y==y_old&&x==x_old){
       document.querySelector('#sq-'+x+y).style.backgroundColor = "green"
     }
+}
+//ham lay user dataa
+function userdata(){
+  var database = firebase.database();
+  var usr = database.ref('User/user');
+  usr.on('value', function(snapshot) {
+    var childData = snapshot.val();   
+    user=childData;
+    x_user= user.slice(0,1);
+    y_user= user.slice(2,3);
+    document.querySelector('#sq-'+x_user+y_user).style.backgroundColor = "yellow"
+    database.ref('User/old').set(user);
+  });
 }
 //ham gui data user len firebase
 function start()  {
