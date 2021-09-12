@@ -4,11 +4,11 @@ window.onload = function onLoad() {
   //tao grid
   gen(6,7);
   var database = firebase.database();
-  var position = database.ref('Position/robot');
+  var position = database.ref('Robot/robot');
   position.on('value', function (snapshot) {
     var childData = snapshot.val();
     pos = childData;
-    var x = pos.slice(0, 1);
+    var x = pos.slice(0, 1); 
     var y = pos.slice(2, 3);
     setColor(x,y);
   });
@@ -23,7 +23,7 @@ window.onload = function onLoad() {
         location.replace("index.html")
     }else{
         document.getElementById("user").innerHTML = "Hello, "+user.email
-    }
+    } 
   })
 };
 //ham tao grid
@@ -94,11 +94,8 @@ function start()  {
   var x = document.getElementById("input_x").value; // A String value
   var y = document.getElementById("input_y").value; // A String value
   var c = x + 0 + y;
-  console.log(x);
-  console.log(y);
-  console.log(c);
   var database = firebase.database();
-  database.ref('Position/user').set(c);
+  database.ref('User/user').set(c);
 };
 //ham logout
 function logout(){
