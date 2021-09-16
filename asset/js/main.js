@@ -25,7 +25,8 @@ window.onload = function onLoad() {
     var yy = user.slice(2, 3);
     userdata(xx, yy, user);
   });
-
+  //nut nhan contact goi popup
+  popup();
   //nut nhan start
   const button = document.getElementById('button')
   button.addEventListener('click', () => {
@@ -78,7 +79,7 @@ function gen(numrow, numcol) {
     }
   }
 }
-//ham setcolor tai vi tri x y
+//ham set color tai vi tri x y
 function setColor(x, y) {
 
   var database = firebase.database();
@@ -222,6 +223,7 @@ function userdata(x, y, ccc) {
     database.ref('User/old').set(xxy_old);
   }
 }
+//ham xoa data user old
 function clear_user_old() {
   var database = firebase.database();
   var usr_old = database.ref('User/old');
@@ -246,6 +248,16 @@ function start() {
   var database = firebase.database();
   database.ref('User/user').set(c);
 };
+//ham popup
+function popup(){
+  document.getElementById("popup").addEventListener("click",function(){
+    document.getElementsByClassName("popup")[0].classList.add("active");
+  });
+   
+  document.getElementById("ok-btn").addEventListener("click",function(){
+    document.getElementsByClassName("popup")[0].classList.remove("active");
+  });
+}
 //ham logout
 function logout() {
   firebase.auth().signOut()
