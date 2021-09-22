@@ -3,6 +3,9 @@ var y_old = 0;
 var user_x_old = 0;
 var user_y_old = 0;
 var cc = 0;
+var valstop="0";
+var valhome="0";
+var valstart="0";
 window.onload = function onLoad() {
   //tao grid
   gen(6, 7);
@@ -31,7 +34,23 @@ window.onload = function onLoad() {
   const button = document.getElementById('button')
   button.addEventListener('click', () => {
     var database = firebase.database();
-    database.ref('Button/start').set(1);
+    var startt = database.ref('Button/start');
+    startt.on('value', function (snapshot) {
+      var childData = snapshot.val();
+      valstart =childData;
+    });
+    switch(parseInt(valstart)) {
+      case 1:
+        document.getElementById('button').style.backgroundColor = "hsl(180, 65%, 80%)";
+        database.ref('Button/start').set("0");
+        window.alert("Robot đã dừng");
+        break;
+      case 0:
+        document.getElementById('button').style.backgroundColor = "red"
+        database.ref('Button/start').set("1");
+        window.alert("Robot bắt đầu di chuyển theo vị trí bạn đã chọn");
+        break;
+    }
     clear_user_old();
     start();
     userdata();
@@ -40,13 +59,45 @@ window.onload = function onLoad() {
   const button_stop = document.getElementById('button-stop')
   button_stop.addEventListener('click', () => {
     var database = firebase.database();
-    database.ref('Button/stop').set(1);
+    var stop = database.ref('Button/stop');
+    stop.on('value', function (snapshot) {
+      var childData = snapshot.val();
+      valstop =childData;
+    });
+    switch(parseInt(valstop)) {
+      case 1:
+        document.getElementById('button-stop').style.backgroundColor = "hsl(180, 65%, 80%)";
+        database.ref('Button/stop').set("0");
+        window.alert("Robot đã dừng");
+        break;
+      case 0:
+        document.getElementById('button-stop').style.backgroundColor = "red"
+        database.ref('Button/stop').set("1");
+        window.alert("Robot bắt đầu di chuyển");
+        break;
+    }
   });
   //nut nhan home
   const button_home = document.getElementById('button-home')
   button_home.addEventListener('click', () => {
     var database = firebase.database();
-    database.ref('Button/home').set(1);
+    var home = database.ref('Button/home');
+    home.on('value', function (snapshot) {
+      var childData = snapshot.val();
+      valhome =childData;
+    });
+    switch(parseInt(valhome)) {
+      case 1:
+        document.getElementById('button-home').style.backgroundColor = "hsl(180, 65%, 80%)";
+        database.ref('Button/home').set("0");
+        window.alert("Robot đã dừng");   
+        break;
+      case 0:
+        document.getElementById('button-home').style.backgroundColor = "red"
+        database.ref('Button/home').set("1");
+        window.alert("Robot bắt đầu di chuyển về home");
+        break;
+    }
   });
 
   // Kiem tra nguoi dung hien tai
