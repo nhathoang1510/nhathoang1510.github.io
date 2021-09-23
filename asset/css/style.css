@@ -216,6 +216,9 @@ li{
     list-style: none;
 }
 
+#grid_position {
+    margin-top: 3em;
+}
 
 .row{
     display: flex;
@@ -228,6 +231,7 @@ li{
 .table-bordered {
     margin-left: 2em;
 }
+
 .square {
     -webkit-text-stroke-width: 0.03em;
     -webkit-text-stroke-color: black;
@@ -258,7 +262,7 @@ li{
     justify-content: center;
     width: 1.5em;
     /* margin-top: 1rem; */
-    margin-right: 0.5rem;
+    margin-right: 1rem;
 }
 
 .description_chu_thich {

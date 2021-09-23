@@ -3,9 +3,9 @@ var y_old = 0;
 var user_x_old = 0;
 var user_y_old = 0;
 var cc = 0;
-var valstop="0";
-var valhome="0";
-var valstart="0";
+var valstop = "0";
+var valhome = "0";
+var valstart = "0";
 window.onload = function onLoad() {
   //tao grid
   gen(6, 7);
@@ -37,9 +37,9 @@ window.onload = function onLoad() {
     var startt = database.ref('Button/start');
     startt.on('value', function (snapshot) {
       var childData = snapshot.val();
-      valstart =childData;
+      valstart = childData;
     });
-    switch(parseInt(valstart)) {
+    switch (parseInt(valstart)) {
       case 1:
         document.getElementById('button').style.backgroundColor = "hsl(180, 65%, 80%)";
         database.ref('Button/start').set("0");
@@ -52,7 +52,7 @@ window.onload = function onLoad() {
         break;
     }
     clear_user_old();
-    start();
+
     userdata();
   });
   //nut nhan Stop
@@ -62,9 +62,9 @@ window.onload = function onLoad() {
     var stop = database.ref('Button/stop');
     stop.on('value', function (snapshot) {
       var childData = snapshot.val();
-      valstop =childData;
+      valstop = childData;
     });
-    switch(parseInt(valstop)) {
+    switch (parseInt(valstop)) {
       case 1:
         document.getElementById('button-stop').style.backgroundColor = "hsl(180, 65%, 80%)";
         database.ref('Button/stop').set("0");
@@ -84,13 +84,13 @@ window.onload = function onLoad() {
     var home = database.ref('Button/home');
     home.on('value', function (snapshot) {
       var childData = snapshot.val();
-      valhome =childData;
+      valhome = childData;
     });
-    switch(parseInt(valhome)) {
+    switch (parseInt(valhome)) {
       case 1:
         document.getElementById('button-home').style.backgroundColor = "hsl(180, 65%, 80%)";
         database.ref('Button/home').set("0");
-        window.alert("Robot đã dừng");   
+        window.alert("Robot đã dừng");
         break;
       case 0:
         document.getElementById('button-home').style.backgroundColor = "red"
@@ -116,7 +116,7 @@ function gen(numrow, numcol) {
     var $row = $('#row-' + i);
     for (let j = 1; j <= numcol; j++) {
       count = i.toString() + j
-      var square = "<li id='sq-" + count + "' class='square'> </li>";
+      var square = "<li onclick = 'checkClick(this)' id='sq-" + count + "' class='square'> </li>";
       $row.append(square);
       // dieu khien gen ra cac o ke hang
 
@@ -130,6 +130,18 @@ function gen(numrow, numcol) {
     }
   }
 }
+// Ham check click ở position
+function checkClick(sq) {
+  clear_user_old();
+  id_clicked = sq.id;
+  x_clicked = id_clicked.slice(3, 4)
+  y_clicked = id_clicked.slice(4, 5)
+  var database = firebase.database();
+  var pos_clicked = x_clicked + 0 + y_clicked;
+  database.ref('User/user').set(pos_clicked);
+  userdata();
+  }
+
 //ham set color tai vi tri x y
 function setColor(x, y) {
 
@@ -292,20 +304,14 @@ function clear_user_old() {
   });
 }
 //ham gui data user len firebase
-function start() {
-  var x = document.getElementById("input_x").value; // A String value
-  var y = document.getElementById("input_y").value; // A String value
-  var c = x + 0 + y;
-  var database = firebase.database();
-  database.ref('User/user').set(c);
-};
+
 //ham popup
-function popup(){
-  document.getElementById("popup").addEventListener("click",function(){
+function popup() {
+  document.getElementById("popup").addEventListener("click", function () {
     document.getElementsByClassName("popup")[0].classList.add("active");
   });
-   
-  document.getElementById("ok-btn").addEventListener("click",function(){
+
+  document.getElementById("ok-btn").addEventListener("click", function () {
     document.getElementsByClassName("popup")[0].classList.remove("active");
   });
 }
