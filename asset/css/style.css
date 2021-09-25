@@ -82,10 +82,12 @@ img{
 .button{
     display: inline-block;
     background-color: var(--first-color);
-    color: #FFF;
+    color: black;
     padding: 1rem;
     border-radius: .5rem;
     font-weight: var(--font-medium);
+    justify-content: center;
+    margin-left: 8em;
 }
 .button:hover{
     background-color: var(--first-color-alt);
@@ -124,6 +126,7 @@ img{
     left: 0;
     z-index: var(--z-fixed);
     /*background-color: var(--first-color);*/
+    margin-top: 1em;
     
 }
 /*==================== NAVIGATION ====================*/
@@ -162,6 +165,10 @@ img{
     color: #696969;
 }
 
+.main {
+    background-image: linear-gradient(to bottom,white, blue, white);
+}
+
 
 #text {
     font-weight: bold;
@@ -169,9 +176,7 @@ img{
     color: #696969;
     text-align: center;
 }
-#button {
-    text-align: center;
-}
+
 .chu-thich {
     text-align: center;
     font-weight: bold;
@@ -229,7 +234,7 @@ li{
 }
 
 .table-bordered {
-    margin-left: 2em;
+    margin-left: 1em;
 }
 
 .square {
@@ -262,7 +267,33 @@ li{
     justify-content: center;
     width: 1.5em;
     /* margin-top: 1rem; */
-    margin-right: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#border_body {
+    justify-content: center;
+    content: center;
+    border-radius: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid;
+    height: 200px;
+    width: 70%;
+}
+
+
+#border_description {
+    display: flex;
+    
+    justify-content: center;
+    content: center;
+    border-radius: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    border-style: solid;
+    width: 70%;
 }
 
 .description_chu_thich {
@@ -444,3 +475,4 @@ footer {
 ::-webkit-scrollbar-thumb:hover{
     background-color: var(--text-color-light);
 }
+/*========== TOOLTIP ==========*/
