@@ -1,7 +1,11 @@
 var x_old = 0;
 var y_old = 0;
+var x_current = 0;
+var y_current = 0;
 var user_x_old = 0;
 var user_y_old = 0;
+var user_x_current = 0;
+var user_y_current = 0;
 var cc = 0;
 var valstop = "0";
 var valhome = "0";
@@ -16,8 +20,14 @@ window.onload = function onLoad() {
     pos = childData;
     var x = pos.slice(0, 1);
     var y = pos.slice(2, 3);
+    x_current = x;
+    y_current = y;
     setColor(x, y);
-    console.log("pos+" + pos);
+    if (x_current == user_x_current & y_current == user_y_current) {
+      document.getElementById('button').style.backgroundColor = "hsl(180, 65%, 80%)";
+      database.ref('Button/start').set("0");
+      window.alert("Robot đã đến vị trí yêu cầu");
+    }
   });
 
   var usr = database.ref('User/user');
@@ -26,8 +36,12 @@ window.onload = function onLoad() {
     user = childData;
     var xx = user.slice(0, 1);
     var yy = user.slice(2, 3);
+    user_x_current = xx;
+    user_y_current = yy;
     userdata(xx, yy, user);
+
   });
+
   //nut nhan contact goi popup
   popup();
   //nut nhan start
@@ -52,9 +66,9 @@ window.onload = function onLoad() {
         break;
     }
     clear_user_old();
-
     userdata();
   });
+
   //nut nhan Stop
   const button_stop = document.getElementById('button-stop')
   button_stop.addEventListener('click', () => {
@@ -268,15 +282,15 @@ function userdata(x, y, ccc) {
     cc = xxy_old.toString();
     user_x_old = xxy_old.slice(0, 1);
     user_y_old = xxy_old.slice(2, 3);
-    console.log(user_x_old);
-    console.log(user_y_old);
+    // console.log(user_x_old);
+    // console.log(user_y_old);
   });
   if (ccc != cc) {
     if (user_x_old >= 2 && user_x_old <= 5 && user_y_old >= 2 && user_y_old <= 3 || user_x_old >= 2 && user_x_old <= 5 && user_y_old >= 5 && user_y_old <= 6) {
       document.querySelector('#sq-' + x + y).style.border = "0.5em solid yellow";
       document.querySelector('#sq-' + user_x_old + user_y_old).style.border = "0.5em";
     } else {
-      console.log('#sq-' + user_x_old + user_y_old);
+      // console.log('#sq-' + user_x_old + user_y_old);
       document.querySelector('#sq-' + x + y).style.border = "0.5em solid yellow";
       document.querySelector('#sq-' + user_x_old + user_y_old).style.border = "0.5em";
 
@@ -295,7 +309,7 @@ function clear_user_old() {
     user_old = childData;
     x_old = user.slice(0, 1);
     y_old = user.slice(2, 3);
-    console.log(x_old + y_old)
+    // console.log(x_old + y_old)
     if (x_old >= 2 && x_old <= 5 && y_old >= 2 && y_old <= 3 || x_old >= 2 && x_old <= 5 && y_old >= 5 && y_old <= 6) {
       document.querySelector('#sq-' + x_old + y_old).style.backgroundColor = "red"
     } else {
@@ -319,3 +333,7 @@ function popup() {
 function logout() {
   firebase.auth().signOut()
 };
+//Tooltip
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});

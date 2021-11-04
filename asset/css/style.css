@@ -166,7 +166,8 @@ img{
 }
 
 .main {
-    background-image: linear-gradient(to bottom,white, blue, white);
+    background-image:url(/asset/img/bg6.jpg);   
+    
 }
 
 
@@ -285,7 +286,6 @@ li{
 
 #border_description {
     display: flex;
-    
     justify-content: center;
     content: center;
     border-radius: 1em;
