@@ -250,7 +250,7 @@ function setColor(x, y) {
     var j = (parseInt(x) + 1).toString();
     if (j >= 2 && j <= 5 && y >= 2 && y <= 3 || j >= 2 && j <= 5 && y >= 5 && y <= 6) {
       document.querySelector('#sq-' + j + y).style.backgroundColor = "red"
-      document.querySelector('#sq-' + j + y).style.border = "0em solid red";
+      //document.querySelector('#sq-' + j + y).style.border = "0em solid red";
     } else if (j == 1 && y == 1) {
       document.querySelector('#sq-' + j + y).style.backgroundColor = "black"
     } else {
@@ -289,16 +289,21 @@ function userdata(x, y, ccc) {
     if (user_x_old >= 2 && user_x_old <= 5 && user_y_old >= 2 && user_y_old <= 3 || user_x_old >= 2 && user_x_old <= 5 && user_y_old >= 5 && user_y_old <= 6) {
       document.querySelector('#sq-' + x + y).style.border = "0.5em solid yellow";
       document.querySelector('#sq-' + user_x_old + user_y_old).style.border = "0.5em";
-    } else {
+    } else if (user_x_old == 1 && user_y_old == 1) {
+      document.querySelector('#sq-' + x + y).style.border = "0.5em solid yellow";
+      document.querySelector('#sq-' + user_x_old + user_x_old).style.backgroundColor = "black"
+      document.querySelector('#sq-' + user_x_old + user_y_old).style.border = "0.5em";
+    }
+    else {
       // console.log('#sq-' + user_x_old + user_y_old);
       document.querySelector('#sq-' + x + y).style.border = "0.5em solid yellow";
       document.querySelector('#sq-' + user_x_old + user_y_old).style.border = "0.5em";
-
     }
     xxy_old = (x + 0 + y).toString();
     var database = firebase.database();
     database.ref('User/old').set(xxy_old);
   }
+  
 }
 //ham xoa data user old
 function clear_user_old() {
